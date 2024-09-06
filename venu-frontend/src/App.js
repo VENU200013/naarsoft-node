@@ -4,10 +4,11 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Sidebar from './maincomponent/Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div>
-
+<ToastContainer />
       <Router>
         {/* <div style={{ display: 'flex' }}>
           <Sidebar />

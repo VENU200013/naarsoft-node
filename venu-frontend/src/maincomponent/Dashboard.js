@@ -5,8 +5,8 @@ import { CiCirclePlus } from "react-icons/ci";
 import Createuser from './Createuser';
 import { GetUsers,deleteUsers } from '../Services';
 import { ToastContainer } from 'react-toastify';
-
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Dashboard() {
     const [createModal, setCreateModal] = useState(false)
     const [item,setItem]=useState({})
@@ -38,11 +38,11 @@ function Dashboard() {
 
         const Response = await GetUsers()
         setData(Response.data)
-        console.log("Response", Response.data);
+        
 
     }
     const updateData=async (item) => {
-        console.log("item",item);
+      
         setItem(item)
         setCreateModal(true)
 
@@ -50,19 +50,27 @@ function Dashboard() {
     const deleteData=async (item) => {
 
        const del= await deleteUsers(item);
+       if(del.status==200){
+     
+        toast.success("User deleted Successfulyy",{
+            position:"top-center",
+            autoClose:3000,
+        })
+       }
        getUsers()
     }
     return (
         <>
-
+<ToastContainer />
             {/* <h3>Dashboard Home</h3> */}
-            <Col lg={12} >
-                <Card className='main-div'>
+            <Col lg={12}  >
+                <Card>
                     <Card.Header>
                         <Card.Title className='users-style'>Users
                             <Button variant="success"
+                             className='mx-3'
                                 onClick={openModal}>
-                                <CiCirclePlus />Add
+                                <CiCirclePlus className='fs-3 h-auto' /> Add User
 
                             </Button>
                         </Card.Title>
@@ -89,8 +97,8 @@ function Dashboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data?.map(item => (
-                                    <tr>
+                                {data?.map((item,i) => (
+                                    <tr key={i}>
                                         <td>
                                             <strong>{item.name}</strong>
                                         </td>
@@ -157,7 +165,6 @@ function Dashboard() {
             </Modal>
 
 
-            <ToastContainer/>
         </>
     )
 }

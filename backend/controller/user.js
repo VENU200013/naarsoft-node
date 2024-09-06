@@ -36,7 +36,7 @@ exports.deleteUser=async(req,res)=>{
     try {
         const {id} =req.headers;
         const deleteUser = await User.findByIdAndDelete(id)
-        res.status(200).json({message:"User Deleted SuccessFully",deleteUser})
+        res.status(200).json({message:"User Deleted SuccessFully",deleteUser,status:200})
     } catch (error) {
         console.log("Internal Server Error")
     }

@@ -11,7 +11,7 @@ export const CreateUsers=async(data)=>{
 }
 
 export const UpdateUsers=async(data)=>{
-    console.log(data,"check user id")
+
     return await axios.put('http://localhost:8000/api/v1/user/update',data,
         {
             headers: {
